@@ -55,3 +55,7 @@
 .cron-editor-main .cron-editor-container .hour-types {
   width: 70px;
 }
+
+.nav-tabs li a {
+  cursor: pointer;
+}
