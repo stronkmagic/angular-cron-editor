@@ -5,8 +5,8 @@ import { Days, MonthWeeks, Months } from "./enums";
 
 @Component({
     selector: "cron-editor",
-    template: require("./cron-editor.template.html"),
-    styles: [require("./cron-editor.component.css").toString()]
+    templateUrl: "./cron-editor.template.html",
+    styleUrls: ["./cron-editor.component.css"]
 })
 export class CronGenComponent implements OnInit, OnChanges {
     @Input() public disabled: boolean;
