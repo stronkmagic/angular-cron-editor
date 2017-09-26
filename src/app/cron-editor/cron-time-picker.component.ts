@@ -2,7 +2,7 @@
 
 @Component({
     selector: "cron-time-picker",
-    templateUrl: "./cron-time-picker.template.html"
+    template: require("./cron-time-picker.template.html")    
 })
 export class TimePickerComponent implements OnInit {
     @Output() public onChange = new EventEmitter();
