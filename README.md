@@ -5,7 +5,12 @@ A library that helps the user graphically build a CRON expression using Angular 
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.2.0. To run the sample app just run `npm run start` and go to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-## Usage:
+
+## Demo
+
+A work-in-progress demo can be found [here](https://claudiuconstantin.github.io/cron-editor/)
+
+## Usage
 
 1. Install the npm package:
     ```
