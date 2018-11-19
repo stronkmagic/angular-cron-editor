@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CronOptions } from "./cron-editor/CronOptions";
+import { CronOptions } from 'projects/cron-editor/src/lib/CronOptions';
 
 @Component({
   selector: 'app-root',
@@ -7,6 +7,7 @@ import { CronOptions } from "./cron-editor/CronOptions";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+
   public cronExpression = '4 3 2 12 1/1 ? *';
   public isCronDisabled = false;
   public cronOptions: CronOptions = {

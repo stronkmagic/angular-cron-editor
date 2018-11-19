@@ -1,0 +1,30 @@
+{
+  "name": "cron-editor",
+  "description": "A cron expression generator to be used in Angular applications",
+  "author": {
+    "name": "Claudiu Constantin",
+    "email": "claudiu@fastmail.com",
+    "url": "https://claudiuconstantin.com"
+  },
+  "version": "1.0.0",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/claudiuconstantin/cron-editor"
+  },
+  "bugs": {
+    "url": "https://github.com/claudiuconstantin/cron-editor/issues"
+  },
+  "homepage": "https://github.com/claudiuconstantin/cron-editor",
+  "keywords": [
+    "angular",
+    "cron",
+    "cron-expression",
+    "angular-cli",
+    "quartz"
+  ],
+  "peerDependencies": {
+    "@angular/common": "^7.0.0",
+    "@angular/core": "^7.0.0"
+  }
+}

@@ -1,4 +1,4 @@
-﻿export const Days = {
+export const Days = {
     'SUN': "Sunday",
     'MON': "Monday",
     'TUE': "Tuesday",
