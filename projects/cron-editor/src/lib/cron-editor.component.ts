@@ -76,18 +76,50 @@ export class CronEditorComponent implements OnInit {
 
     switch (this.activeTab) {
       case "minutes":
-        this.cron = `${this.state.minutes.seconds} 0/${this.state.minutes.minutes} * 1/1 * ? *`;
+        this.cron = `0/${this.state.minutes.minutes} * 1/1 * ?`;
+
+        if (!this.options.removeSeconds) {
+          this.cron = `${this.state.minutes.seconds} ${this.cron}`;
+        }
+
+        if (!this.options.removeYears) {
+          this.cron = `${this.cron} *`;
+        }
         break;
       case "hourly":
-        this.cron = `${this.state.hourly.seconds} ${this.state.hourly.minutes} 0/${this.state.hourly.hours} 1/1 * ? *`;
+        this.cron = `${this.state.hourly.minutes} 0/${this.state.hourly.hours} 1/1 * ?`;
+
+        if (!this.options.removeSeconds) {
+          this.cron = `${this.state.hourly.seconds} ${this.cron}`;
+        }
+
+        if (!this.options.removeYears) {
+          this.cron = `${this.cron} *`;
+        }
         break;
       case "daily":
         switch (this.state.daily.subTab) {
           case "everyDays":
-            this.cron = `${this.state.daily.everyDays.seconds} ${this.state.daily.everyDays.minutes} ${this.hourToCron(this.state.daily.everyDays.hours, this.state.daily.everyDays.hourType)} 1/${this.state.daily.everyDays.days} * ? *`;
+            this.cron = `${this.state.daily.everyDays.minutes} ${this.hourToCron(this.state.daily.everyDays.hours, this.state.daily.everyDays.hourType)} 1/${this.state.daily.everyDays.days} * ?`;
+
+            if (!this.options.removeSeconds) {
+              this.cron = `${this.state.daily.everyDays.seconds} ${this.cron}`;
+            }
+
+            if (!this.options.removeYears) {
+              this.cron = `${this.cron} *`;
+            }
             break;
           case "everyWeekDay":
-            this.cron = `${this.state.daily.everyWeekDay.seconds} ${this.state.daily.everyWeekDay.minutes} ${this.hourToCron(this.state.daily.everyWeekDay.hours, this.state.daily.everyWeekDay.hourType)} ? * MON-FRI *`;
+            this.cron = `${this.state.daily.everyWeekDay.minutes} ${this.hourToCron(this.state.daily.everyWeekDay.hours, this.state.daily.everyWeekDay.hourType)} ? * MON-FRI`;
+
+            if (!this.options.removeSeconds) {
+              this.cron = `${this.state.daily.everyWeekDay.seconds} ${this.cron}`;
+            }
+
+            if (!this.options.removeYears) {
+              this.cron = `${this.cron} *`;
+            }            
             break;
           default:
             throw "Invalid cron daily subtab selection";
@@ -97,15 +129,39 @@ export class CronEditorComponent implements OnInit {
         const days = this.selectOptions.days
           .reduce((acc, day) => this.state.weekly[day] ? acc.concat([day]) : acc, [])
           .join(",");
-        this.cron = `${this.state.weekly.seconds} ${this.state.weekly.minutes} ${this.hourToCron(this.state.weekly.hours, this.state.weekly.hourType)} ? * ${days} *`;
+        this.cron = `${this.state.weekly.minutes} ${this.hourToCron(this.state.weekly.hours, this.state.weekly.hourType)} ? * ${days}`;
+
+        if (!this.options.removeSeconds) {
+          this.cron = `${this.state.weekly.seconds} ${this.cron}`;
+        }
+
+        if (!this.options.removeYears) {
+          this.cron = `${this.cron} *`;
+        }        
         break;
       case "monthly":
         switch (this.state.monthly.subTab) {
           case "specificDay":
-            this.cron = `${this.state.monthly.specificDay.seconds} ${this.state.monthly.specificDay.minutes} ${this.hourToCron(this.state.monthly.specificDay.hours, this.state.monthly.specificDay.hourType)} ${this.state.monthly.specificDay.day} 1/${this.state.monthly.specificDay.months} ? *`;
+            this.cron = `${this.state.monthly.specificDay.minutes} ${this.hourToCron(this.state.monthly.specificDay.hours, this.state.monthly.specificDay.hourType)} ${this.state.monthly.specificDay.day} 1/${this.state.monthly.specificDay.months} ?`;
+
+            if (!this.options.removeSeconds) {
+              this.cron = `${this.state.monthly.specificDay.seconds} ${this.cron}`;
+            }
+
+            if (!this.options.removeYears) {
+              this.cron = `${this.cron} *`;
+            }            
             break;
           case "specificWeekDay":
-            this.cron = `${this.state.monthly.specificWeekDay.seconds} ${this.state.monthly.specificWeekDay.minutes} ${this.hourToCron(this.state.monthly.specificWeekDay.hours, this.state.monthly.specificWeekDay.hourType)} ? 1/${this.state.monthly.specificWeekDay.months} ${this.state.monthly.specificWeekDay.day}${this.state.monthly.specificWeekDay.monthWeek} *`;
+            this.cron = `${this.state.monthly.specificWeekDay.minutes} ${this.hourToCron(this.state.monthly.specificWeekDay.hours, this.state.monthly.specificWeekDay.hourType)} ? 1/${this.state.monthly.specificWeekDay.months} ${this.state.monthly.specificWeekDay.day}${this.state.monthly.specificWeekDay.monthWeek}`;
+
+            if (!this.options.removeSeconds) {
+              this.cron = `${this.state.monthly.specificWeekDay.seconds} ${this.cron}`;
+            }
+
+            if (!this.options.removeYears) {
+              this.cron = `${this.cron} *`;
+            }
             break;
           default:
             throw "Invalid cron monthly subtab selection";
@@ -114,10 +170,26 @@ export class CronEditorComponent implements OnInit {
       case "yearly":
         switch (this.state.yearly.subTab) {
           case "specificMonthDay":
-            this.cron = `${this.state.yearly.specificMonthDay.seconds} ${this.state.yearly.specificMonthDay.minutes} ${this.hourToCron(this.state.yearly.specificMonthDay.hours, this.state.yearly.specificMonthDay.hourType)} ${this.state.yearly.specificMonthDay.day} ${this.state.yearly.specificMonthDay.month} ? *`;
+            this.cron = `${this.state.yearly.specificMonthDay.minutes} ${this.hourToCron(this.state.yearly.specificMonthDay.hours, this.state.yearly.specificMonthDay.hourType)} ${this.state.yearly.specificMonthDay.day} ${this.state.yearly.specificMonthDay.month} ?`;
+
+            if (!this.options.removeSeconds) {
+              this.cron = `${this.state.yearly.specificMonthDay.seconds} ${this.cron}`;
+            }
+
+            if (!this.options.removeYears) {
+              this.cron = `${this.cron} *`;
+            }            
             break;
           case "specificMonthWeek":
-            this.cron = `${this.state.yearly.specificMonthWeek.seconds} ${this.state.yearly.specificMonthWeek.minutes} ${this.hourToCron(this.state.yearly.specificMonthWeek.hours, this.state.yearly.specificMonthWeek.hourType)} ? ${this.state.yearly.specificMonthWeek.month} ${this.state.yearly.specificMonthWeek.day}${this.state.yearly.specificMonthWeek.monthWeek} *`;
+            this.cron = `${this.state.yearly.specificMonthWeek.minutes} ${this.hourToCron(this.state.yearly.specificMonthWeek.hours, this.state.yearly.specificMonthWeek.hourType)} ? ${this.state.yearly.specificMonthWeek.month} ${this.state.yearly.specificMonthWeek.day}${this.state.yearly.specificMonthWeek.monthWeek}`;
+
+            if (!this.options.removeSeconds) {
+              this.cron = `${this.state.yearly.specificMonthWeek.seconds} ${this.cron}`;
+            }
+
+            if (!this.options.removeYears) {
+              this.cron = `${this.cron} *`;
+            }
             break;
           default:
             throw "Invalid cron yearly subtab selection";
@@ -155,8 +227,14 @@ export class CronEditorComponent implements OnInit {
       this.isDirty = false;
     }
 
-    if (!this.cronIsValid(cron)) {
-      throw "Invalid cron expression, there must be 6 or 7 segments";
+    this.validate(cron);
+
+    if (this.options.removeSeconds) {
+      cron = `0 ${cron}`;
+    }
+
+    if (this.options.removeYears) {
+      cron = `${cron} *`;
     }
 
     const [seconds, minutes, hours, dayOfMonth, month, dayOfWeek] = cron.split(" ");
@@ -252,14 +330,30 @@ export class CronEditorComponent implements OnInit {
     }
   }
 
-  private cronIsValid(cron: string): boolean {
-    if (cron) {
-      const cronParts = cron.split(" ");
+  private validate(cron: string): void {
+    this.state.validation.isValid = false;
+    this.state.validation.errorMessage = "";
 
-      return cronParts.length === 6 || cronParts.length === 7;
+    if (!cron) {
+      this.state.validation.errorMessage = "Cron expression cannot be null";
+      return;
     }
 
-    return false;
+    const cronParts = cron.split(" ");
+
+    let expected = 5;
+    if (!this.options.removeSeconds)
+      expected++;
+    if (!this.options.removeYears)
+      expected++;
+
+    if (cronParts.length !== expected) {
+      this.state.validation.errorMessage = `Invalid cron expression, there must be ${expected} segments`;
+      return;
+    } 
+
+    this.state.validation.isValid = true;
+    return;
   }
 
   private getDefaultState() {
@@ -346,6 +440,10 @@ export class CronEditorComponent implements OnInit {
       },
       advanced: {
         expression: "0 15 10 L-2 * ?"
+      },
+      validation : {
+        isValid : true,
+        errorMessage: ""
       }
     };
   }
