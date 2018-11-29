@@ -7,7 +7,9 @@ import { CronOptions } from 'projects/cron-editor/src/lib/CronOptions';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-
+  //Hangfire compatible expression
+  //public cronExpression = '3 2 12 1/1 ?';
+  //Quartz compatible expression
   public cronExpression = '4 3 2 12 1/1 ? *';
   public isCronDisabled = false;
   public cronOptions: CronOptions = {
@@ -27,6 +29,9 @@ export class AppComponent {
     hideAdvancedTab: false,
 
     use24HourTime: true,
-    hideSeconds: false
+    hideSeconds: false,
+
+    removeSeconds: false, 
+    removeYears: false
   };
 }

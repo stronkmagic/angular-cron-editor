@@ -295,5 +295,8 @@
                 </div>
             </div>
         </div>
+        <div class="row" *ngIf="!state.validation.isValid">
+            <code>{{state.validation.errorMessage}}</code>
+        </div>
     </div>
 </div>
