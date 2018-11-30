@@ -6,9 +6,9 @@ import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
   styleUrls: ['./time-picker.component.css']
 })
 export class TimePickerComponent implements OnInit {
-  @Output() public onChange = new EventEmitter();
+  @Output() public change = new EventEmitter();
   @Input() public disabled: boolean;
-  @Input() public model: any;
+  @Input() public time: any;
   @Input() public selectClass: string;
   @Input() public use24HourTime: boolean;
   @Input() public hideSeconds: boolean;
