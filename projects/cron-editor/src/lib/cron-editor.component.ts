@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter, SimpleChanges } from '@angular/core';
 import { CronOptions } from './CronOptions';
 import { Days, MonthWeeks, Months } from './enums';
+import Utils from './Utils';
 
 @Component({
   selector: 'cron-editor',

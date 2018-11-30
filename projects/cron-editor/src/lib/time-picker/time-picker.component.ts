@@ -1,5 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 
+import Utils from '../Utils';
+
 @Component({
   selector: 'cron-time-picker',
   templateUrl: './time-picker.component.html',
@@ -19,14 +21,9 @@ export class TimePickerComponent implements OnInit {
   public hourTypes: string[];
 
   public async ngOnInit() {
-    this.hours = this.use24HourTime ? this.range(0, 23) : this.range(0, 12);
-    this.minutes = this.range(0, 59);
-    this.seconds = this.range(0, 59);
-    this.hourTypes = ["AM", "PM"];
-  }
-
-  private range(start: number, end: number): number[] {
-    const length = end - start + 1;
-    return Array.apply(undefined, Array(length)).map((_, i) => i + start);
+    this.hours = this.use24HourTime ? Utils.getRange(0, 23) : Utils.getRange(0, 12);
+    this.minutes = Utils.getRange(0, 59);
+    this.seconds = Utils.getRange(0, 59);
+    this.hourTypes = ['AM', 'PM'];
   }
 }
