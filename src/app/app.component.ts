@@ -7,9 +7,8 @@ import { CronOptions } from 'projects/cron-editor/src/lib/CronOptions';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  //Hangfire compatible expression
-  //public cronExpression = '3 2 12 1/1 ?';
-  //Quartz compatible expression
+  // Hangfire 1.7+ compatible expression: '3 2 12 1/1 ?'
+  // Quartz compatible expression: '4 3 2 12 1/1 ? *'
   public cronExpression = '4 3 2 12 1/1 ? *';
   public isCronDisabled = false;
   public cronOptions: CronOptions = {
@@ -18,7 +17,8 @@ export class AppComponent {
     formRadioClass: 'cron-editor-radio',
     formCheckboxClass: 'cron-editor-checkbox',
 
-    defaultTime: "10:00:00",
+    defaultTime: '10:00:00',
+    use24HourTime: true,
 
     hideMinutesTab: false,
     hideHourlyTab: false,
@@ -28,10 +28,8 @@ export class AppComponent {
     hideYearlyTab: false,
     hideAdvancedTab: false,
 
-    use24HourTime: true,
     hideSeconds: false,
-
-    removeSeconds: false, 
+    removeSeconds: false,
     removeYears: false
   };
 }
