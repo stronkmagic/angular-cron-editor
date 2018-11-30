@@ -106,6 +106,7 @@ export class CronEditorComponent implements OnInit, OnChanges {
       case 'daily':
         switch (this.state.daily.subTab) {
           case 'everyDays':
+            // tslint:disable-next-line:max-line-length
             this.cron = `${this.state.daily.everyDays.minutes} ${this.hourToCron(this.state.daily.everyDays.hours, this.state.daily.everyDays.hourType)} 1/${this.state.daily.everyDays.days} * ?`;
 
             if (!this.options.removeSeconds) {
@@ -117,6 +118,7 @@ export class CronEditorComponent implements OnInit, OnChanges {
             }
             break;
           case 'everyWeekDay':
+            // tslint:disable-next-line:max-line-length
             this.cron = `${this.state.daily.everyWeekDay.minutes} ${this.hourToCron(this.state.daily.everyWeekDay.hours, this.state.daily.everyWeekDay.hourType)} ? * MON-FRI`;
 
             if (!this.options.removeSeconds) {
@@ -148,6 +150,7 @@ export class CronEditorComponent implements OnInit, OnChanges {
       case 'monthly':
         switch (this.state.monthly.subTab) {
           case 'specificDay':
+            // tslint:disable-next-line:max-line-length
             this.cron = `${this.state.monthly.specificDay.minutes} ${this.hourToCron(this.state.monthly.specificDay.hours, this.state.monthly.specificDay.hourType)} ${this.state.monthly.specificDay.day} 1/${this.state.monthly.specificDay.months} ?`;
 
             if (!this.options.removeSeconds) {
@@ -159,6 +162,7 @@ export class CronEditorComponent implements OnInit, OnChanges {
             }
             break;
           case 'specificWeekDay':
+            // tslint:disable-next-line:max-line-length
             this.cron = `${this.state.monthly.specificWeekDay.minutes} ${this.hourToCron(this.state.monthly.specificWeekDay.hours, this.state.monthly.specificWeekDay.hourType)} ? 1/${this.state.monthly.specificWeekDay.months} ${this.state.monthly.specificWeekDay.day}${this.state.monthly.specificWeekDay.monthWeek}`;
 
             if (!this.options.removeSeconds) {
@@ -176,6 +180,7 @@ export class CronEditorComponent implements OnInit, OnChanges {
       case 'yearly':
         switch (this.state.yearly.subTab) {
           case 'specificMonthDay':
+            // tslint:disable-next-line:max-line-length
             this.cron = `${this.state.yearly.specificMonthDay.minutes} ${this.hourToCron(this.state.yearly.specificMonthDay.hours, this.state.yearly.specificMonthDay.hourType)} ${this.state.yearly.specificMonthDay.day} ${this.state.yearly.specificMonthDay.month} ?`;
 
             if (!this.options.removeSeconds) {
@@ -187,6 +192,7 @@ export class CronEditorComponent implements OnInit, OnChanges {
             }
             break;
           case 'specificMonthWeek':
+            // tslint:disable-next-line:max-line-length
             this.cron = `${this.state.yearly.specificMonthWeek.minutes} ${this.hourToCron(this.state.yearly.specificMonthWeek.hours, this.state.yearly.specificMonthWeek.hourType)} ? ${this.state.yearly.specificMonthWeek.month} ${this.state.yearly.specificMonthWeek.day}${this.state.yearly.specificMonthWeek.monthWeek}`;
 
             if (!this.options.removeSeconds) {
