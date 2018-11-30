@@ -14,8 +14,13 @@ export interface CronOptions {
     hideMonthlyTab: boolean;
     hideYearlyTab: boolean;
     hideAdvancedTab: boolean;
-    hideSeconds: boolean; //hides the seconds field in the UI
 
-    removeSeconds: boolean; // removes seconds from the CRON expression
-    removeYears: boolean; // removes years from the CRON expression
+    /** hides the Seconds UI form element */
+    hideSeconds: boolean;
+
+    /** removes Seconds from the Cron expression */
+    removeSeconds: boolean;
+
+    /** removes Years from the Cron expression */
+    removeYears: boolean;
 }
