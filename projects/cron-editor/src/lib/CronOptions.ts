@@ -4,7 +4,8 @@ export interface CronOptions {
     formRadioClass: string;
     formCheckboxClass: string;
 
-    defaultTime: string,
+    defaultTime: string;
+    use24HourTime: boolean;
 
     hideMinutesTab: boolean;
     hideHourlyTab: boolean;
@@ -13,7 +14,6 @@ export interface CronOptions {
     hideMonthlyTab: boolean;
     hideYearlyTab: boolean;
     hideAdvancedTab: boolean;
-    use24HourTime: boolean;
     hideSeconds: boolean; //hides the seconds field in the UI
 
     removeSeconds: boolean; // removes seconds from the CRON expression

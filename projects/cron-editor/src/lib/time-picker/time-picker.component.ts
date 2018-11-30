@@ -20,7 +20,7 @@ export class TimePickerComponent implements OnInit {
   public seconds: number[];
   public hourTypes: string[];
 
-  public async ngOnInit() {
+  public ngOnInit() {
     this.hours = this.use24HourTime ? Utils.getRange(0, 23) : Utils.getRange(0, 12);
     this.minutes = Utils.getRange(0, 59);
     this.seconds = Utils.getRange(0, 59);
