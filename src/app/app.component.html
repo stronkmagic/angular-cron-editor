@@ -1,9 +1,11 @@
 <div class="row">
-  <cron-editor [(cron)]="cronExpression" [disabled]="isCronDisabled" [(options)]="cronOptions"></cron-editor>
+  <div class=" col-12">
+    <angular-cron-editor [(cron)]="cronExpression" [disabled]="isCronDisabled" [(options)]="cronOptions"></angular-cron-editor>
 
-  <hr />
-  <p>The resulting Cron expression: </p>
-  <div class="form-group mx-sm-3 mb-2">
-    <input type="text" class="form-control" [(ngModel)]="cronExpression">
+    <hr />
+    <p>The resulting Cron expression: </p>
+    <div class="form-group mx-sm-3 mb-2">
+      <input type="text" class="form-control" [(ngModel)]="cronExpression">
+    </div>
   </div>
 </div>

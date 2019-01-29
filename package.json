@@ -1,21 +1,21 @@
 {
-  "name": "cron-editor-app",
+  "name": "angular-cron-editor-app",
   "description": "A cron expression generator to be used in Angular applications",
   "author": {
-    "name": "Claudiu Constantin",
-    "email": "claudiu@fastmail.com",
-    "url": "https://claudiuconstantin.com"
+    "name": "Vladlen Kyselov",
+    "email": "vladlenkiselyov@gmail.com",
+    "url": "https://github.com"
   },
   "version": "1.0.0",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git://github.com/claudiuconstantin/cron-editor"
+    "url": "git://github.com/stronkmagic/angular-cron-editor"
   },
   "bugs": {
-    "url": "https://github.com/claudiuconstantin/cron-editor/issues"
+    "url": "https://github.com/stronkmagic/angular-cron-editor/issues"
   },
-  "homepage": "https://github.com/claudiuconstantin/cron-editor",
+  "homepage": "https://github.com/stronkmagic/angular-cron-editor",
   "keywords": [
     "angular",
     "cron",
@@ -28,14 +28,13 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "build_lib": "ng build cron-editor",
-    "build": "ng build cron-editor && ng build --prod",    
+    "build_lib": "ng build angular-cron-editor",
+    "build": "ng build angular-cron-editor && ng build --prod",
     "start": "yarn run build_lib && ng serve",
-
-    "copy-license": "copy .\\LICENSE.md .\\dist\\cron-editor",
-    "copy-readme": "copy .\\README.md .\\dist\\cron-editor",
+    "copy-license": "copy .\\LICENSE.md .\\dist\\angular-cron-editor",
+    "copy-readme": "copy .\\README.md .\\dist\\angular-cron-editor",
     "copy-files": "npm run copy-license && npm run copy-readme",
-    "pack_lib": "cd dist/cron-editor && npm pack",
+    "pack_lib": "cd dist/angular-cron-editor && npm pack",
     "package": "npm run build_lib && npm run copy-files && npm run pack_lib"
   },
   "private": true,
@@ -62,7 +61,7 @@
     "@types/jasmine": "~3.3.0",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~10.12.11",
-    "bootstrap": "~3.3.7",
+    "bootstrap": "^4.2.1",
     "codelyzer": "~4.5.0",
     "jasmine-core": "~3.3.0",
     "jasmine-spec-reporter": "~4.2.1",

@@ -5,7 +5,7 @@ import Utils from '../Utils';
 @Component({
   selector: 'cron-time-picker',
   templateUrl: './time-picker.component.html',
-  styleUrls: ['./time-picker.component.css']
+  styleUrls: ['./time-picker.component.scss']
 })
 export class TimePickerComponent implements OnInit {
   @Output() public change = new EventEmitter();

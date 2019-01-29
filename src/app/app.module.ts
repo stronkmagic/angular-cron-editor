@@ -4,11 +4,11 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 import { AppComponent } from './app.component';
-import { CronEditorModule } from 'cron-editor';
+import {AngularCronEditorModule} from "angular-cron-editor";
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, FormsModule, CommonModule, CronEditorModule],
+  imports: [BrowserModule, FormsModule, CommonModule, AngularCronEditorModule],
   providers: [],
   bootstrap: [AppComponent]
 })

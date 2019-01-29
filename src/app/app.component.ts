@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CronOptions } from 'projects/cron-editor/src/lib/CronOptions';
+import { CronOptions } from 'projects/angular-cron-editor/src/lib/CronOptions';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +9,8 @@ import { CronOptions } from 'projects/cron-editor/src/lib/CronOptions';
 export class AppComponent {
   // Hangfire 1.7+ compatible expression: '3 2 12 1/1 ?'
   // Quartz compatible expression: '4 3 2 12 1/1 ? *'
-  public cronExpression = '4 3 2 12 1/1 ? *';
+  //public cronExpression = '4 3 2 12 1/1 ? *';
+  public cronExpression = '0 0 12 */1 *';
   public isCronDisabled = false;
   public cronOptions: CronOptions = {
     formInputClass: 'form-control cron-editor-input',
@@ -20,16 +21,16 @@ export class AppComponent {
     defaultTime: '10:00:00',
     use24HourTime: true,
 
-    hideMinutesTab: false,
-    hideHourlyTab: false,
+    hideMinutesTab: true,
+    hideHourlyTab: true,
     hideDailyTab: false,
     hideWeeklyTab: false,
     hideMonthlyTab: false,
     hideYearlyTab: false,
-    hideAdvancedTab: false,
+    hideAdvancedTab: true,
 
-    hideSeconds: false,
-    removeSeconds: false,
-    removeYears: false
+    hideSeconds: true,
+    removeSeconds: true,
+    removeYears: true
   };
 }

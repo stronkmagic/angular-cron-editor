@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CronEditorComponent } from './cron-editor.component';
+import { AngularCronEditorComponent } from './angular-cron-editor.component';
 
-describe('CronEditorComponent', () => {
-  let component: CronEditorComponent;
-  let fixture: ComponentFixture<CronEditorComponent>;
+describe('AngularCronEditorComponent', () => {
+  let component: AngularCronEditorComponent;
+  let fixture: ComponentFixture<AngularCronEditorComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CronEditorComponent ]
+      declarations: [ AngularCronEditorComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CronEditorComponent);
+    fixture = TestBed.createComponent(AngularCronEditorComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

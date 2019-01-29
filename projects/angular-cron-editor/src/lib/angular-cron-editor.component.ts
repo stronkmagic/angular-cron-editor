@@ -5,11 +5,11 @@ import { Days, MonthWeeks, Months } from './enums';
 import Utils from './Utils';
 
 @Component({
-  selector: 'cron-editor',
-  templateUrl: './cron-editor.component.html',
-  styleUrls: ['./cron-editor.component.css']
+  selector: 'angular-cron-editor',
+  templateUrl: './angular-cron-editor.component.html',
+  styleUrls: ['./angular-cron-editor.component.scss']
 })
-export class CronEditorComponent implements OnInit, OnChanges {
+export class AngularCronEditorComponent implements OnInit, OnChanges {
   @Input() public disabled: boolean;
   @Input() public options: CronOptions;
 
@@ -68,10 +68,6 @@ export class CronEditorComponent implements OnInit, OnChanges {
   public monthDayDisplay(month: string): string {
     if (month === 'L') {
       return 'Last Day';
-    } else if (month === 'LW') {
-      return 'Last Weekday';
-    } else if (month === '1W') {
-      return 'First Weekday';
     } else {
       return `${month}${this.getOrdinalSuffix(month)} day`;
     }
@@ -82,7 +78,7 @@ export class CronEditorComponent implements OnInit, OnChanges {
 
     switch (this.activeTab) {
       case 'minutes':
-        this.cron = `0/${this.state.minutes.minutes} * 1/1 * ?`;
+        this.cron = `*/${this.state.minutes.minutes} * */1 * *`;
 
         if (!this.options.removeSeconds) {
           this.cron = `${this.state.minutes.seconds} ${this.cron}`;
@@ -93,7 +89,7 @@ export class CronEditorComponent implements OnInit, OnChanges {
         }
         break;
       case 'hourly':
-        this.cron = `${this.state.hourly.minutes} 0/${this.state.hourly.hours} 1/1 * ?`;
+        this.cron = `${this.state.hourly.minutes} 0/${this.state.hourly.hours} */1 * *`;
 
         if (!this.options.removeSeconds) {
           this.cron = `${this.state.hourly.seconds} ${this.cron}`;
@@ -107,7 +103,7 @@ export class CronEditorComponent implements OnInit, OnChanges {
         switch (this.state.daily.subTab) {
           case 'everyDays':
             // tslint:disable-next-line:max-line-length
-            this.cron = `${this.state.daily.everyDays.minutes} ${this.hourToCron(this.state.daily.everyDays.hours, this.state.daily.everyDays.hourType)} 1/${this.state.daily.everyDays.days} * ?`;
+            this.cron = `${this.state.daily.everyDays.minutes} ${this.hourToCron(this.state.daily.everyDays.hours, this.state.daily.everyDays.hourType)} */${this.state.daily.everyDays.days} * *`;
 
             if (!this.options.removeSeconds) {
               this.cron = `${this.state.daily.everyDays.seconds} ${this.cron}`;
@@ -119,7 +115,7 @@ export class CronEditorComponent implements OnInit, OnChanges {
             break;
           case 'everyWeekDay':
             // tslint:disable-next-line:max-line-length
-            this.cron = `${this.state.daily.everyWeekDay.minutes} ${this.hourToCron(this.state.daily.everyWeekDay.hours, this.state.daily.everyWeekDay.hourType)} ? * MON-FRI`;
+            this.cron = `${this.state.daily.everyWeekDay.minutes} ${this.hourToCron(this.state.daily.everyWeekDay.hours, this.state.daily.everyWeekDay.hourType)} * * MON-FRI`;
 
             if (!this.options.removeSeconds) {
               this.cron = `${this.state.daily.everyWeekDay.seconds} ${this.cron}`;
@@ -137,7 +133,7 @@ export class CronEditorComponent implements OnInit, OnChanges {
         const days = this.selectOptions.days
           .reduce((acc, day) => this.state.weekly[day] ? acc.concat([day]) : acc, [])
           .join(',');
-        this.cron = `${this.state.weekly.minutes} ${this.hourToCron(this.state.weekly.hours, this.state.weekly.hourType)} ? * ${days}`;
+        this.cron = `${this.state.weekly.minutes} ${this.hourToCron(this.state.weekly.hours, this.state.weekly.hourType)} * * ${days}`;
 
         if (!this.options.removeSeconds) {
           this.cron = `${this.state.weekly.seconds} ${this.cron}`;
@@ -151,7 +147,7 @@ export class CronEditorComponent implements OnInit, OnChanges {
         switch (this.state.monthly.subTab) {
           case 'specificDay':
             // tslint:disable-next-line:max-line-length
-            this.cron = `${this.state.monthly.specificDay.minutes} ${this.hourToCron(this.state.monthly.specificDay.hours, this.state.monthly.specificDay.hourType)} ${this.state.monthly.specificDay.day} 1/${this.state.monthly.specificDay.months} ?`;
+            this.cron = `${this.state.monthly.specificDay.minutes} ${this.hourToCron(this.state.monthly.specificDay.hours, this.state.monthly.specificDay.hourType)} ${this.state.monthly.specificDay.day} */${this.state.monthly.specificDay.months} *`;
 
             if (!this.options.removeSeconds) {
               this.cron = `${this.state.monthly.specificDay.seconds} ${this.cron}`;
@@ -163,7 +159,7 @@ export class CronEditorComponent implements OnInit, OnChanges {
             break;
           case 'specificWeekDay':
             // tslint:disable-next-line:max-line-length
-            this.cron = `${this.state.monthly.specificWeekDay.minutes} ${this.hourToCron(this.state.monthly.specificWeekDay.hours, this.state.monthly.specificWeekDay.hourType)} ? 1/${this.state.monthly.specificWeekDay.months} ${this.state.monthly.specificWeekDay.day}${this.state.monthly.specificWeekDay.monthWeek}`;
+            this.cron = `${this.state.monthly.specificWeekDay.minutes} ${this.hourToCron(this.state.monthly.specificWeekDay.hours, this.state.monthly.specificWeekDay.hourType)} * */${this.state.monthly.specificWeekDay.months} ${this.state.monthly.specificWeekDay.day}${this.state.monthly.specificWeekDay.monthWeek}`;
 
             if (!this.options.removeSeconds) {
               this.cron = `${this.state.monthly.specificWeekDay.seconds} ${this.cron}`;
@@ -181,7 +177,7 @@ export class CronEditorComponent implements OnInit, OnChanges {
         switch (this.state.yearly.subTab) {
           case 'specificMonthDay':
             // tslint:disable-next-line:max-line-length
-            this.cron = `${this.state.yearly.specificMonthDay.minutes} ${this.hourToCron(this.state.yearly.specificMonthDay.hours, this.state.yearly.specificMonthDay.hourType)} ${this.state.yearly.specificMonthDay.day} ${this.state.yearly.specificMonthDay.month} ?`;
+            this.cron = `${this.state.yearly.specificMonthDay.minutes} ${this.hourToCron(this.state.yearly.specificMonthDay.hours, this.state.yearly.specificMonthDay.hourType)} ${this.state.yearly.specificMonthDay.day} ${this.state.yearly.specificMonthDay.month} *`;
 
             if (!this.options.removeSeconds) {
               this.cron = `${this.state.yearly.specificMonthDay.seconds} ${this.cron}`;
@@ -193,7 +189,7 @@ export class CronEditorComponent implements OnInit, OnChanges {
             break;
           case 'specificMonthWeek':
             // tslint:disable-next-line:max-line-length
-            this.cron = `${this.state.yearly.specificMonthWeek.minutes} ${this.hourToCron(this.state.yearly.specificMonthWeek.hours, this.state.yearly.specificMonthWeek.hourType)} ? ${this.state.yearly.specificMonthWeek.month} ${this.state.yearly.specificMonthWeek.day}${this.state.yearly.specificMonthWeek.monthWeek}`;
+            this.cron = `${this.state.yearly.specificMonthWeek.minutes} ${this.hourToCron(this.state.yearly.specificMonthWeek.hours, this.state.yearly.specificMonthWeek.hourType)} * ${this.state.yearly.specificMonthWeek.month} ${this.state.yearly.specificMonthWeek.day}${this.state.yearly.specificMonthWeek.monthWeek}`;
 
             if (!this.options.removeSeconds) {
               this.cron = `${this.state.yearly.specificMonthWeek.seconds} ${this.cron}`;
@@ -251,18 +247,18 @@ export class CronEditorComponent implements OnInit, OnChanges {
 
     const [seconds, minutes, hours, dayOfMonth, month, dayOfWeek] = cron.split(' ');
 
-    if (cron.match(/\d+ 0\/\d+ \* 1\/1 \* \? \*/)) {
+    if (cron.match(/\d+ \*\/\d+ \* \*\/1 \* \* \*/)) {
       this.activeTab = 'minutes';
 
       this.state.minutes.minutes = Number(minutes.substring(2));
       this.state.minutes.seconds = Number(seconds);
-    } else if (cron.match(/\d+ \d+ 0\/\d+ 1\/1 \* \? \*/)) {
+    } else if (cron.match(/\d+ \d+ \*\/\d+ \*\/1 \* \* \*/)) {
       this.activeTab = 'hourly';
 
       this.state.hourly.hours = Number(hours.substring(2));
       this.state.hourly.minutes = Number(minutes);
       this.state.hourly.seconds = Number(seconds);
-    } else if (cron.match(/\d+ \d+ \d+ 1\/\d+ \* \? \*/)) {
+    } else if (cron.match(/\d+ \d+ \d+ \*\/\d+ \* \* \*/)) {
       this.activeTab = 'daily';
 
       this.state.daily.subTab = 'everyDays';
@@ -272,7 +268,7 @@ export class CronEditorComponent implements OnInit, OnChanges {
       this.state.daily.everyDays.hourType = this.getHourType(parsedHours);
       this.state.daily.everyDays.minutes = Number(minutes);
       this.state.daily.everyDays.seconds = Number(seconds);
-    } else if (cron.match(/\d+ \d+ \d+ \? \* MON-FRI \*/)) {
+    } else if (cron.match(/\d+ \d+ \d+ \* \* MON-FRI \*/)) {
       this.activeTab = 'daily';
 
       this.state.daily.subTab = 'everyWeekDay';
@@ -281,7 +277,7 @@ export class CronEditorComponent implements OnInit, OnChanges {
       this.state.daily.everyWeekDay.hourType = this.getHourType(parsedHours);
       this.state.daily.everyWeekDay.minutes = Number(minutes);
       this.state.daily.everyWeekDay.seconds = Number(seconds);
-    } else if (cron.match(/\d+ \d+ \d+ \? \* (MON|TUE|WED|THU|FRI|SAT|SUN)(,(MON|TUE|WED|THU|FRI|SAT|SUN))* \*/)) {
+    } else if (cron.match(/\d+ \d+ \d+ \* \* (MON|TUE|WED|THU|FRI|SAT|SUN)(,(MON|TUE|WED|THU|FRI|SAT|SUN))* \*/)) {
       this.activeTab = 'weekly';
       this.selectOptions.days.forEach(weekDay => this.state.weekly[weekDay] = false);
       dayOfWeek.split(',').forEach(weekDay => this.state.weekly[weekDay] = true);
@@ -290,7 +286,7 @@ export class CronEditorComponent implements OnInit, OnChanges {
       this.state.weekly.hourType = this.getHourType(parsedHours);
       this.state.weekly.minutes = Number(minutes);
       this.state.weekly.seconds = Number(seconds);
-    } else if (cron.match(/\d+ \d+ \d+ (\d+|L|LW|1W) 1\/\d+ \? \*/)) {
+    } else if (cron.match(/\d+ \d+ \d+ (\d+|L) \*\/\d+ \* \*/)) {
       this.activeTab = 'monthly';
       this.state.monthly.subTab = 'specificDay';
       this.state.monthly.specificDay.day = dayOfMonth;
@@ -300,7 +296,7 @@ export class CronEditorComponent implements OnInit, OnChanges {
       this.state.monthly.specificDay.hourType = this.getHourType(parsedHours);
       this.state.monthly.specificDay.minutes = Number(minutes);
       this.state.monthly.specificDay.seconds = Number(seconds);
-    } else if (cron.match(/\d+ \d+ \d+ \? 1\/\d+ (MON|TUE|WED|THU|FRI|SAT|SUN)((#[1-5])|L) \*/)) {
+    } else if (cron.match(/\d+ \d+ \d+ \* \*\/\d+ (MON|TUE|WED|THU|FRI|SAT|SUN)((#[1-5])|L) \*/)) {
       const day = dayOfWeek.substr(0, 3);
       const monthWeek = dayOfWeek.substr(3);
       this.activeTab = 'monthly';
@@ -313,7 +309,7 @@ export class CronEditorComponent implements OnInit, OnChanges {
       this.state.monthly.specificWeekDay.hourType = this.getHourType(parsedHours);
       this.state.monthly.specificWeekDay.minutes = Number(minutes);
       this.state.monthly.specificWeekDay.seconds = Number(seconds);
-    } else if (cron.match(/\d+ \d+ \d+ (\d+|L|LW|1W) \d+ \? \*/)) {
+    } else if (cron.match(/\d+ \d+ \d+ (\d+|L|LW|1W) \d+ \* \*/)) {
       this.activeTab = 'yearly';
       this.state.yearly.subTab = 'specificMonthDay';
       this.state.yearly.specificMonthDay.month = Number(month);
@@ -323,7 +319,7 @@ export class CronEditorComponent implements OnInit, OnChanges {
       this.state.yearly.specificMonthDay.hourType = this.getHourType(parsedHours);
       this.state.yearly.specificMonthDay.minutes = Number(minutes);
       this.state.yearly.specificMonthDay.seconds = Number(seconds);
-    } else if (cron.match(/\d+ \d+ \d+ \? \d+ (MON|TUE|WED|THU|FRI|SAT|SUN)((#[1-5])|L) \*/)) {
+    } else if (cron.match(/\d+ \d+ \d+ \* \d+ (MON|TUE|WED|THU|FRI|SAT|SUN)((#[1-5])|L) \*/)) {
       const day = dayOfWeek.substr(0, 3);
       const monthWeek = dayOfWeek.substr(3);
       this.activeTab = 'yearly';
@@ -488,14 +484,14 @@ export class CronEditorComponent implements OnInit, OnChanges {
   private getSelectOptions() {
     return {
       months: Utils.getRange(1, 12),
-      monthWeeks: ['#1', '#2', '#3', '#4', '#5', 'L'],
+      monthWeeks: ['#1', '#2', '#3', '#4', '#5'],
       days: ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'],
       minutes: Utils.getRange(0, 59),
       fullMinutes: Utils.getRange(0, 59),
       seconds: Utils.getRange(0, 59),
       hours: Utils.getRange(1, 23),
       monthDays: Utils.getRange(1, 31),
-      monthDaysWithLasts: ['1W', ...[...Utils.getRange(1, 31).map(String)], 'LW', 'L'],
+      monthDaysWithLasts: [ ...[...Utils.getRange(1, 31).map(String)], 'L'],
       hourTypes: ['AM', 'PM']
     };
   }
