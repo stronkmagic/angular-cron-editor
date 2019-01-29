@@ -1,4 +1,4 @@
-cron-editor
+angular-cron-editor
 ===
 
 [![Build Status](https://travis-ci.org/claudiuconstantin/cron-editor.svg?branch=master)](https://travis-ci.org/claudiuconstantin/cron-editor)
