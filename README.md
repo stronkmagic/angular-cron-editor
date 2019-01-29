@@ -4,7 +4,7 @@ angular-cron-editor
 [![Build Status](https://travis-ci.org/claudiuconstantin/cron-editor.svg?branch=master)](https://travis-ci.org/claudiuconstantin/cron-editor)
 [![npm version](https://badge.fury.io/js/cron-editor.svg)](https://badge.fury.io/js/cron-editor)
 
-`angular-cron-editor` is library that helps the user graphically build a CRON expression  in an Angular application. It is a fork of [angular-cron-gen](https://github.com/claudiuconstantin/cron-editor) for AngularJS, ported to Angular 2+ and heavily improved.
+`angular-cron-editor` is library that helps the user graphically build a CRON expression  in an Angular application. It is a fork of [cron-editor](https://github.com/claudiuconstantin/cron-editor) for AngularJS, ported to Angular 2+ and heavily improved.
 
 This project contains the library along with an app to ease development and testing. It was generated with [Angular CLI](https://github.com/angular/angular-cli), following the awesome [Ng Library Series](https://blog.angularindepth.com/creating-a-library-in-angular-6-87799552e7e5) written by Todd Palmer.
 
